@@ -22,6 +22,7 @@ import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.metadata.Metadata
 import kotlinx.coroutines.launch
+import net.lunprojects.heartsync.HeartRateService
 import org.json.JSONObject
 import java.io.File
 import java.time.Instant
@@ -122,7 +123,7 @@ fun HeartSyncScreen(activity: ComponentActivity) {
         OutlinedButton(
             onClick = {
                 coroutineScope.launch {
-                    val granted = healthConnectClient.permissionController.getPermissionsGranted()
+                    val granted = healthConnectClient.permissionController.getGrantedPermissions()
                     if (!granted.contains(hrPermission)) {
                         healthPermissionsLauncher.launch(setOf(hrPermission))
                         return@launch
